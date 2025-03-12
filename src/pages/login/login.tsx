@@ -4,13 +4,15 @@ import { useDispatch, useSelector } from '../../services/store';
 import {
   clearErrors,
   errorSelector,
+  isUserAuthenticatedSelector,
   loginUserThunk
 } from '../../services/slices/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export const Login: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const isAuthenticated = useSelector(isUserAuthenticatedSelector);
 
   const dispatch = useDispatch();
   const error = useSelector(errorSelector);
@@ -19,12 +21,13 @@ export const Login: FC = () => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     dispatch(loginUserThunk({ email, password }));
-    navigate('/');
   };
 
-  useEffect(() => {
-    dispatch(clearErrors());
-  }, []);
+  if (isAuthenticated) {
+    return <Navigate to={'/'} />;
+  } else {
+    clearErrors();
+  }
 
   return (
     <LoginUI

@@ -26,7 +26,8 @@ const orderSlice = createSlice({
   initialState,
   selectors: {
     isOrderLoadingSelector: (state) => state.isOrderLoading,
-    orderSelector: (state) => state.order
+    orderSelector: (state) => state.order,
+    errorSelector: (state) => state.error
   },
   reducers: {
     clearOrder: (state) => {
@@ -51,5 +52,6 @@ const orderSlice = createSlice({
 });
 
 export const { clearOrder } = orderSlice.actions;
-export const { isOrderLoadingSelector, orderSelector } = orderSlice.selectors;
+export const { isOrderLoadingSelector, orderSelector, errorSelector } =
+  orderSlice.selectors;
 export default orderSlice.reducer;

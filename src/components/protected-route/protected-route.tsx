@@ -32,7 +32,7 @@ export const ProtectedRoute = ({
   /** Если авторизованы */
   if (onlyUnAuth && isAuthChecked) {
     const from = location.state?.from || { pathname: '/' };
-    return <Navigate replace to={from} state={location} />;
+    return <Navigate replace to={from} />;
   }
 
   return children;
